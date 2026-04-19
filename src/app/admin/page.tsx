@@ -279,7 +279,7 @@ export default function AdminPage() {
                           <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400">
                             {activeTab === 'projects' && <Video className="w-6 h-6" />}
                             {activeTab === 'experience' && <Briefcase className="w-6 h-6" />}
-                            {activeTab === 'awards' && <Award className="w-6 h-6" />}
+
                             {activeTab === 'skills' && <Wand2 className="w-6 h-6" />}
                             {activeTab === 'site_config' && <Settings className="w-6 h-6" />}
                           </div>
