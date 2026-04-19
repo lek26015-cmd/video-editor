@@ -13,11 +13,11 @@ export function LayoutProvider({ children }: { children: React.ReactNode }) {
       <Navbar onMenuToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
       
       <div className="flex flex-grow pt-14">
-        <Sidebar isOpen={isSidebarOpen} />
+        <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
         
         <main className={cn(
           "flex-grow transition-all duration-300 min-h-[calc(100vh-3.5rem)]",
-          isSidebarOpen ? "ml-60" : "ml-20"
+          isSidebarOpen ? "md:ml-60 ml-0" : "md:ml-20 ml-0"
         )}>
           {children}
         </main>

@@ -3,21 +3,20 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Youtube, Music2, MoreVertical, CheckCircle2 } from 'lucide-react';
-import { VideoItem } from '@/lib/types';
+import { Play, Music2, MoreVertical, CheckCircle2 } from 'lucide-react';
+import { Youtube } from '@/components/ui/icons';
+import { getVideoThumbnail } from '@/lib/video-utils';
 import { cn } from '@/lib/utils';
+import { VideoItem } from '@/lib/types';
 
 interface VideoCardProps {
   video: VideoItem;
+  onClick: (video: VideoItem) => void;
 }
 
-export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+export const VideoCard: React.FC<VideoCardProps> = ({ video, onClick }) => {
   const isVertical = video.orientation === 'vertical';
-
-  const handlePlay = () => {
-    setIsPlaying(true);
-  };
+  const displayThumbnail = getVideoThumbnail(video.videoUrl, video.platform, video.thumbnailUrl);
 
   return (
     <motion.div
@@ -27,7 +26,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.3 }}
       className="group relative flex flex-col space-y-3 cursor-pointer"
-      onClick={handlePlay}
+      onClick={() => onClick(video)}
     >
       {/* Thumbnail/Embed Container */}
       <div 
@@ -36,59 +35,35 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video }) => {
           isVertical ? "aspect-[9/16]" : "aspect-video"
         )}
       >
-        {!isPlaying ? (
-          <>
-            {/* Thumbnail */}
-            <Image
-              src={video.thumbnailUrl}
-              alt={video.title}
-              fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-            />
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 shadow-xl">
-                <Play className="w-6 h-6 fill-current" />
-              </div>
+        <>
+          {/* Thumbnail */}
+          <Image
+            src={displayThumbnail}
+            alt={video.title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center text-white scale-0 group-hover:scale-100 transition-transform duration-300 shadow-xl">
+              <Play className="w-6 h-6 fill-current" />
             </div>
-            {/* Platform Icon */}
-            <div className="absolute top-2 right-2 p-1.5 rounded-md bg-black/60 backdrop-blur-md text-white">
-              {video.platform === 'youtube' ? (
-                <Youtube className="w-4 h-4 text-red-500" />
-              ) : (
-                <Music2 className="w-4 h-4 text-cyan-400" />
-              )}
-            </div>
-            {/* Time Stamp (YouTube style) */}
-            {!isVertical && (
-              <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/80 text-[11px] font-medium text-white">
-                12:45
-              </div>
-            )}
-          </>
-        ) : (
-          /* Embed */
-          <div className="w-full h-full bg-black">
+          </div>
+          {/* Platform Icon */}
+          <div className="absolute top-2 right-2 p-1.5 rounded-md bg-black/60 backdrop-blur-md text-white">
             {video.platform === 'youtube' ? (
-              <iframe
-                src={`${video.videoUrl}?autoplay=1`}
-                title={video.title}
-                className="w-full h-full border-0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              <Youtube className="w-4 h-4 text-red-500" />
             ) : (
-              <div className="w-full h-full flex items-center justify-center">
-                {/* Simplified TikTok Embed for demo purposes, would usually use blockquote */}
-                 <iframe
-                    src={`https://www.tiktok.com/embed/v2/${video.videoUrl.split('/').pop()}`}
-                    className="w-full h-full border-0"
-                    allowFullScreen
-                  />
-              </div>
+              <Music2 className="w-4 h-4 text-cyan-400" />
             )}
           </div>
-        )}
+          {/* Time Stamp (YouTube style) */}
+          {!isVertical && (
+            <div className="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/80 text-[11px] font-medium text-white">
+              12:45
+            </div>
+          )}
+        </>
       </div>
 
       {/* Info Container */}

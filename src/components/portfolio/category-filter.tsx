@@ -41,8 +41,8 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
               "relative z-10",
               isSelected ? "text-slate-900 font-bold" : "text-slate-100"
             )}>
-              {category === 'Horizontal' ? 'Horizontal (16:9)' : 
-               category === 'Vertical' ? 'Vertical (9:16)' : category}
+              {category === 'HORIZONTAL' ? 'HORIZONTAL (16:9)' : 
+               category === 'VERTICAL' ? 'VERTICAL (9:16)' : category}
             </span>
 
             {/* Framer Motion Indicator (Optional but nice) */}

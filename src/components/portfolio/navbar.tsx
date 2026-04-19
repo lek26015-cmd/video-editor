@@ -1,8 +1,10 @@
 'use client';
 
 import React from 'react';
-import { Menu, Search, Mic, Video, Bell, User, Youtube } from 'lucide-react';
+import { Menu, Search, Mic, Video, Bell, User } from 'lucide-react';
+import { Youtube } from '@/components/ui/icons';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 interface NavbarProps {
   onMenuToggle: () => void;
@@ -19,12 +21,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
         >
           <Menu className="w-6 h-6 text-white" />
         </button>
-        <div className="flex items-center space-x-1 cursor-pointer">
+        <Link href="/" className="flex items-center space-x-1 cursor-pointer">
           <div className="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
             <Youtube className="w-5 h-5 text-white fill-current" />
           </div>
-          <span className="text-white font-bold text-xl tracking-tighter">Portfolio</span>
-        </div>
+          <span className="text-white font-bold text-xl tracking-tighter uppercase">PORTFOLIO</span>
+        </Link>
       </div>
 
       {/* Middle - Search */}
@@ -35,10 +37,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
             <input 
               type="text" 
               placeholder="Search videos..."
-              className="w-full bg-transparent py-2 text-white outline-none placeholder:text-slate-500"
+              className="w-full bg-transparent py-2 text-white outline-none placeholder:text-slate-500 focus:placeholder:text-slate-400"
             />
           </div>
-          <button className="bg-[#222222] border border-l-0 border-[#303030] rounded-r-full px-5 py-2.5 hover:bg-[#2a2a2a] transition-colors">
+          <button className="bg-[#222222] border border-l-0 border-[#303030] rounded-r-full px-5 py-2.5 hover:bg-[#2a2a2a] transition-colors border-l-white/10">
             <Search className="w-5 h-5 text-white" />
           </button>
         </div>
@@ -55,7 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuToggle }) => {
         <button className="p-2 hover:bg-white/10 rounded-full md:block hidden">
           <Bell className="w-6 h-6 text-white" />
         </button>
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-500 flex items-center justify-center text-white font-bold cursor-pointer">
+        <div className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center text-white font-bold cursor-pointer hover:bg-red-700 transition-colors">
           T
         </div>
       </div>

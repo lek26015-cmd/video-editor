@@ -4,11 +4,11 @@ export interface VideoItem {
   platform: 'youtube' | 'tiktok';
   orientation: 'horizontal' | 'vertical';
   videoUrl: string;
-  thumbnailUrl: string;
+  thumbnailUrl?: string;
   views?: string;
   publishedAt?: string;
   channelName?: string;
   channelAvatar?: string;
 }
 
-export type Category = 'All' | 'Horizontal' | 'Vertical';
+export type Category = 'ALL' | 'HORIZONTAL' | 'VERTICAL';

@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { LayoutProvider } from "@/components/portfolio/layout-provider";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Video Editing Portfolio",
-  description: "A showcase of premium cinematic video editing works.",
+  title: "พอร์ตโฟลิโอตัดต่อวิดีโอ | Video Editing Portfolio",
+  description: "รวบรวมผลงานตัดต่อวิดีโอระดับมืออาชีพ ประสบการณ์กว่า 10 ปี พร้อมร่วมงานกับทีมโปรดักชันชั้นนำ",
 };
 
 export default function RootLayout({
@@ -16,8 +13,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
-      <body className={`${inter.className} min-h-screen bg-[#0f0f0f] text-white antialiased`}>
+    <html lang="th" className="dark scroll-smooth">
+      <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lazywasin/line-seed-th@master/css/line-seed-th.css" />
+      </head>
+      <body className="min-h-screen bg-[#0f0f0f] text-white antialiased">
         <LayoutProvider>{children}</LayoutProvider>
       </body>
     </html>
